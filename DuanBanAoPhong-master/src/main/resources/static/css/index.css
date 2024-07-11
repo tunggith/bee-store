@@ -1,0 +1,358 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+body{
+    font-family: Arial, sans-serif;
+}
+
+/*  điều chỉnh logo */
+
+.loggo{
+    width: 200px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.col-4{
+    width: 300px;
+    height: 1100px;
+    background-color: bisque;
+}
+
+.col-4 a {
+    color:  black;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.menu .submenu{
+    list-style-type: none ;
+    margin: 0;
+    padding: 0;
+}
+/* Định dạng cho container */
+
+
+/* Định dạng cho liên kết hình ảnh logo */
+.loggo {
+    width: 100%; /* Đặt hình ảnh logo chiếm toàn bộ chiều rộng */
+    max-width: 150px; /* Đặt chiều rộng tối đa cho logo */
+    display: block; /* Hiển thị logo như một block để dễ kiểm soát margin */
+    margin-bottom: 20px; /* Thêm khoảng cách dưới logo */
+}
+
+/* Định dạng chung cho menu và submenu */
+.menu, .submenu {
+    list-style-type: none; /* Xóa dấu đầu dòng */
+    padding: 0; /* Xóa khoảng cách thụt vào */
+    margin: 0; /* Xóa khoảng cách bên ngoài */
+}
+
+/* Định dạng các mục menu chính */
+.menu > li {
+    position: relative; /* Để sử dụng cho submenu thả xuống */
+    background-color: #333; /* Màu nền cho mục chính */
+    margin-bottom: 35px; /* Khoảng cách giữa các mục */
+    border-radius: 5px; /* Bo góc các mục */
+}
+
+.menu > li > a {
+    display: block; /* Hiển thị như một khối */
+    padding: 10px 25px; /* Khoảng cách bên trong */
+    color: white; /* Màu chữ */
+    text-decoration: none; /* Xóa gạch chân */
+    font-size: 16px; /* Kích thước chữ */
+}
+
+.menu > li > a:hover {
+    background-color: #444; /* Đổi màu nền khi hover */
+}
+
+/* Định dạng cho submenu */
+.submenu {
+    display: none; /* Ẩn submenu mặc định */
+    position: absolute; /* Hiển thị submenu trên các mục khác */
+    left: 100%; /* Đặt submenu bên cạnh mục chính */
+    top: 0; /* Canh trên cùng */
+    background-color: #333; /* Màu nền cho submenu */
+    padding: 0; /* Xóa khoảng cách bên trong */
+    border-radius: 5px; /* Bo góc */
+    z-index: 1; /* Đảm bảo submenu hiển thị phía trên */
+}
+
+/* Định dạng các mục trong submenu */
+.submenu > li {
+    width: 200px; /* Chiều rộng cố định cho submenu */
+}
+
+.submenu > li > a {
+    display: block; /* Hiển thị như một khối */
+    padding: 10px 15px; /* Khoảng cách bên trong */
+    color: white; /* Màu chữ */
+    text-decoration: none; /* Xóa gạch chân */
+    font-size: 14px; /* Kích thước chữ nhỏ hơn một chút */
+    border-bottom: 1px solid #555; /* Đường viền dưới */
+}
+
+.submenu > li > a:hover {
+    background-color: #444; /* Đổi màu nền khi hover */
+}
+
+/* Hiển thị submenu khi hover lên mục chính */
+.menu > li:hover > .submenu {
+    display: block; /* Hiển thị submenu */
+}
+
+/* Hiển thị submenu khi hover lên mục con có submenu */
+.submenu > li:hover > .submenu {
+    display: block; /* Hiển thị submenu */
+    left: 100%; /* Đặt submenu bên cạnh mục chính */
+    top: 0; /* Canh trên cùng */
+    background-color: #333; /* Màu nền cho submenu */
+}
+
+/* Điều chỉnh khoảng cách giữa các mục submenu */
+.submenu > li > a {
+    margin-bottom: 25px; /* Khoảng cách giữa các mục */
+}
+
+/* Xóa margin của mục cuối cùng */
+.submenu > li:last-child > a {
+    margin-bottom: 0;
+}
+
+
+nav{
+    background-color: rgba(0, 0, 0, 0.299);
+    width: 100%;
+    height: 30px;
+
+}
+
+/* Định dạng chung cho bảng */
+.table-hoadon {
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    border-collapse: collapse; /* Gộp viền các ô */
+    margin-bottom: 20px; /* Thêm khoảng cách bên dưới bảng */
+    font-family: Arial, sans-serif; /* Font chữ */
+}
+
+/* Định dạng tiêu đề bảng */
+.table-hoadon th {
+    background-color: #4CAF50; /* Màu nền */
+    color: white; /* Màu chữ */
+    text-align: left; /* Căn trái */
+    padding: 12px; /* Khoảng cách bên trong */
+    border-bottom: 2px solid #ddd; /* Viền dưới */
+    font-size: 16px; /* Kích thước chữ */
+}
+
+/* Định dạng các ô dữ liệu */
+.table-hoadon td {
+    padding: 12px; /* Khoảng cách bên trong */
+    border-bottom: 1px solid #ddd; /* Viền dưới */
+    text-align: left; /* Căn trái */
+    font-size: 14px; /* Kích thước chữ */
+    color: #333; /* Màu chữ */
+}
+
+/* Màu nền xen kẽ cho các dòng */
+.table-hoadon tr:nth-child(even) {
+    background-color: #f2f2f2; /* Màu nền cho các dòng chẵn */
+}
+
+/* Đổi màu khi hover lên các dòng */
+.table-hoadon tr:hover {
+    background-color: #e1f5fe; /* Màu nền khi hover */
+}
+
+/* Viền cho bảng */
+.table-hoadon {
+    border: 1px solid #ddd; /* Viền bảng */
+    border-radius: 5px; /* Bo góc bảng */
+    overflow: hidden; /* Ẩn phần thừa khi bo góc */
+}
+
+/* Căn giữa văn bản tiêu đề */
+.table-hoadon th {
+    text-align: center; /* Căn giữa văn bản */
+}
+
+/* Căn giữa văn bản trong cột đầu tiên */
+.table-hoadon td:first-child {
+    text-align: center; /* Căn giữa văn bản */
+}
+
+/* Căn giữa văn bản trong cột trạng thái */
+.table-hoadon td:last-child {
+    text-align: center; /* Căn giữa văn bản */
+}
+
+/* Định dạng cho dòng tiêu đề */
+.table-hoadon tr:first-child {
+    background-color: #2196F3; /* Màu nền cho dòng tiêu đề */
+    color: white; /* Màu chữ cho dòng tiêu đề */
+    font-weight: bold; /* Chữ đậm */
+    font-size: 18px; /* Kích thước chữ */
+}
+
+
+.btn-chon{
+    width: 50px;
+    height: 40px;
+    color: #333;
+    background-color: #2196F3;
+    border: 3px #2196F3;
+
+}
+
+.btn-chon a{
+
+    text-decoration: none;
+    color: aliceblue;
+
+}
+
+.col-3 {
+    width: 33.33%; /* Chiếm 1/3 chiều rộng */
+    padding: 20px; /* Khoảng cách bên trong */
+    box-sizing: border-box; /* Không tính padding vào kích thước */
+    font-family: Arial, sans-serif; /* Font chữ */
+}
+
+
+
+h1 {
+    text-align: center; /* Căn giữa tiêu đề */
+    font-size: 20px; /* Kích thước chữ */
+    margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+}
+
+form {
+    margin-bottom: 20px; /* Khoảng cách dưới form */
+}
+
+form label {
+    display: block; /* Hiển thị label như một block */
+    margin-bottom: 5px; /* Khoảng cách dưới label */
+}
+
+form input[type="text"] {
+    width: calc(100% - 80px); /* Độ rộng input */
+    padding: 8px; /* Khoảng cách bên trong input */
+    margin-bottom: 10px; /* Khoảng cách dưới input */
+    border: 1px solid #ccc; /* Viền input */
+    border-radius: 4px; /* Bo góc input */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+form button {
+    padding: 8px 15px; /* Kích thước button */
+    background-color: #4CAF50; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: none; /* Xóa viền */
+    border-radius: 4px; /* Bo góc */
+    cursor: pointer; /* Con trỏ chuột */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+form button:hover {
+    background-color: #45a049; /* Màu nền khi hover */
+}
+
+.thanhtoan {
+    background-color: #f2f2f2; /* Màu nền */
+    padding: 15px; /* Khoảng cách bên trong */
+    border: 1px solid #ccc; /* Viền */
+    border-radius: 4px; /* Bo góc */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+.thanhtoan h1 {
+    text-align: center; /* Căn giữa tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+.thanhtoan b {
+    display: inline-block; /* Hiển thị làm một khối để dễ căn chỉnh */
+    margin-bottom: 5px; /* Khoảng cách dưới mỗi dòng */
+}
+
+.thanhtoan input[type="text"] {
+    width: calc(100% - 120px); /* Độ rộng input */
+    padding: 6px; /* Khoảng cách bên trong input */
+    margin-bottom: 5px; /* Khoảng cách dưới input */
+    border: 1px solid #ccc; /* Viền input */
+    border-radius: 4px; /* Bo góc input */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+.thanhtoan button {
+    margin-top: 10px; /* Khoảng cách trên button */
+    padding: 8px 15px; /* Kích thước button */
+    background-color: #4CAF50; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: none; /* Xóa viền */
+    border-radius: 4px; /* Bo góc */
+    cursor: pointer; /* Con trỏ chuột */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+.thanhtoan button:hover {
+    background-color: #45a049; /* Màu nền khi hover */
+}
+
+/* Định nghĩa popup chính, ban đầu ẩn và bao phủ toàn bộ màn hình */
+.popup {
+    display: none; /* Ban đầu ẩn popup, sẽ hiển thị khi cần thiết */
+    position: fixed; /* Định vị cố định, không bị cuộn theo trang */
+    z-index: 1; /* Đặt thứ tự xếp chồng lên trên các phần tử khác */
+    left: 0; /* Đặt ở góc trái màn hình */
+    top: 0; /* Đặt ở góc trên cùng của màn hình */
+    width: 100%; /* Bao phủ toàn bộ chiều rộng màn hình */
+    height: 100%; /* Bao phủ toàn bộ chiều cao màn hình */
+    overflow: auto; /* Cho phép cuộn nếu nội dung bên trong vượt quá chiều cao */
+    background-color: rgba(0, 0, 0, 0.4); /* Màu nền đen với độ trong suốt 40%, tạo hiệu ứng che mờ */
+}
+
+/* Định nghĩa nội dung của popup */
+.popup-content {
+    background-color: #fefefe; /* Màu nền trắng cho nội dung popup */
+    margin: 15% auto; /* Đặt nội dung cách phần trên của màn hình 15% và canh giữa theo chiều ngang */
+    padding: 20px; /* Thêm khoảng cách bên trong */
+    border: 1px solid #888; /* Viền màu xám nhạt cho nội dung popup */
+    width: 30%; /* Chiều rộng của nội dung popup bằng 30% chiều rộng màn hình */
+}
+
+/* Định nghĩa nút đóng của popup */
+.close-btn {
+    color: #aaa; /* Màu chữ xám nhạt cho nút đóng */
+    float: right; /* Đẩy nút đóng sang góc phải của popup */
+    font-size: 28px; /* Kích thước chữ lớn cho nút đóng */
+    font-weight: bold; /* Chữ đậm cho nút đóng */
+}
+
+/* Hiệu ứng khi di chuột hoặc tập trung vào nút đóng */
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Đổi màu thành đen khi hover hoặc focus */
+    text-decoration: none; /* Xóa gạch chân văn bản */
+    cursor: pointer; /* Thay đổi con trỏ thành hình bàn tay để chỉ định có thể nhấn */
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+    background-color: green;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+}

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bee store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div style="display: flex;">
+    <div id="content1">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container">
+
+                <a class="navbar-brand" href="#">
+                    <img src="/img/logo.png" class="object-fit-cover border rounded" alt="BeeStore" width="80"
+                         height="80">
+                    BEE STORE
+                </a>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <span>Wellcome,</span><span> Hà Thanh Tùng</span>
+        </div>
+        <div class="container-fluid">
+            <button class="navbar-brand btn btn-primary w-100 p-3 text-light">Bán hàng tại quầy</button>
+        </div>
+
+        <div class="container-fluid">
+            <button class="navbar-brand mb-0 h1 btn btn-primary w-100 p-3 text-light">Quản lý sản phẩm</button>
+        </div>
+        <div class="container-fluid">
+            <button class="navbar-brand mb-0 h2 btn btn-primary w-100 p-3 text-light">Quản lý hóa đơn</button>
+        </div>
+        <div class="container-fluid">
+            <button class="navbar-brand mb-0 h2 btn btn-primary w-100 p-3 text-light">Thống kê</button>
+        </div>
+        <div class="container-fluid">
+            <button class="navbar-brand mb-0 h2 btn btn-primary w-100 p-3 text-light">Quản lý mã giảm giá</button>
+        </div>
+        <div class="container-fluid">
+            <button class="navbar-brand mb-0 h2 btn btn-primary w-100 p-3 text-light">Quản lý tài khoản</button>
+        </div>
+        <div class="container-fluid">
+            <button class="navbar-brand mb-0 h2 btn btn-primary w-100 p-3 text-light">
+                Đăng xuất <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                               class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                <path fill-rule="evenodd"
+                      d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+            </svg>
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content-add">
+            <h2 class="text-center">Thêm Chi tiết sản phẩm</h2>
+            <form action="/bee-store/san-pham-chi-tiet/add" method="post">
+                <div class="form-group" style="width: 700px;margin-left: 10px">
+                    <label for="sanPham">Tên Sản Phẩm:</label>
+                    <select class="form-control" id="sanPham" name="sanPham">
+                        <option hidden="hidden">--Chọn sản phẩm--</option>
+                        <th:block th:each="sp : ${idSP}">
+                            <option th:value="${sp.id}" th:text="${sp.ten}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6" style="width: 500px">
+                        <label for="mauSac">Màu Sắc:</label>
+                        <select class="form-control" id="mauSac" name="mauSac">
+                            <option hidden="hidden">--Chọn màu sắc--</option>
+                            <th:block th:each="sp : ${idMS}">
+                                <option th:value="${sp.id}" th:text="${sp.ten}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6" style="width: 500px;margin-left: 20px">
+                        <label for="size">Kích Thước:</label>
+                        <select class="form-control" id="size" name="size">
+                            <option hidden="hidden">--Chọn kích thước--</option>
+                            <th:block th:each="sp : ${idSize}">
+                                <option th:value="${sp.id}" th:text="${sp.ten}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="width: 300px">
+                        <label for="thuongHieu">Thương Hiệu</label>
+                        <input type="text" class="form-control" id="thuongHieu" name="thuongHieu">
+
+                    </div>
+                    <div class="form-group" style="width: 300px;margin-left: 10px">
+                        <label for="chatLieu">Chất Liệu</label>
+                        <input type="text" class="form-control" id="chatLieu" name="chatLieu">
+                    </div>
+                    <div class="form-group " style="width: 300px;margin-left: 10px">
+                        <label for="xuatXu">Xuất Xứ</label>
+                        <input type="text" class="form-control" id="xuatXu" name="xuatXu">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="width: 300px">
+                        <label for="giaNhap">Giá Nhập</label>
+                        <input type="text" class="form-control" id="giaNhap" name="giaNhap">
+                    </div>
+                    <div class="form-group" style="width: 300px;margin-left: 10px">
+                        <label for="giaBan">Giá Bán</label>
+                        <input type="text" class="form-control" id="giaBan" name="giaBan">
+                    </div>
+                    <div class="form-group" style="width: 300px;margin-left: 10px">
+                        <label for="soLuong">Số Lượng</label>
+                        <input type="text" class="form-control" id="soLuong" name="soLuongTon">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div style="margin-left: 30px">
+                        <label for="soLuong">Trạng Thái</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault1" value="1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Còn Hàng
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault2" value="0" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Hết Hàng
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success" style="margin-left: 500px; width: 100px;height:40px;margin-top: 40px">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+                            <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5"/>
+                            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                        </svg> Thêm
+                    </button>
+
+                </div>
+            </form>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <form class="d-flex" action="/bee-store/san-pham-chi-tiet/search" method="get">
+                    <input class="form-control me-2 rounded-pill" name="sanPhamName" type="search" placeholder="Tên sản phẩm"
+                           aria-label="Search">
+                    <input class="form-control me-2 rounded-pill" name="mauSacName" type="search" placeholder="Màu Sắc"
+                           aria-label="Search">
+                    <input class="form-control me-2 rounded-pill" name="sizeName" type="search" placeholder="Kích Thước"
+                           aria-label="Search">
+                    <input class="form-control me-2 rounded-pill" name="chatLieuName" type="search" placeholder="Chất liệu"
+                           aria-label="Search">
+                    <input class="form-control me-2 rounded-pill" name="soLuongName" type="search" placeholder="Số Lượng Tồn"
+                           aria-label="Search">
+                    <button class="btn btn-outline-success rounded-pill" type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+        </div>
+        <!-- table chi tiết sản phẩm -->
+        <h2  style="margin-top: 20px" class="text-center">Danh sách Chi tiết sản phẩm</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr class="table-success">
+                <th scope="col">Stt</th>
+                <th scope="col">Mã sản phẩm</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Chất liệu</th>
+                <th scope="col">Thương Hiệu</th>
+                <th scope="col">Xuất xứ</th>
+                <th scope="col">Giá nhập</th>
+                <th scope="col">Giá bán</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Trạng Thái</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="sanPhamCT,stat : ${listSanPham}">
+                <th scope="row" th:text="${stat.index+1}"></th>
+                <td th:utext="${sanPhamCT.getSanPham().getMa()}"></td>
+                <td th:text="${sanPhamCT.sanPham.ten} + ' [' + ${sanPhamCT.mauSac.ten} + ' - ' + ${sanPhamCT.size.ten} + ']'"></td>
+                <td th:utext="${sanPhamCT.getChatLieu()}"></td>
+                <td th:utext="${sanPhamCT.getThuongHieu()}"></td>
+                <td th:utext="${sanPhamCT.getXuatXu()}"></td>
+                <td th:utext="${sanPhamCT.getGiaNhap()}"></td>
+                <td th:utext="${sanPhamCT.getGiaBan()}"></td>
+                <td th:utext="${sanPhamCT.getSoLuongTon()}"></td>
+                <td>
+                    <div id="wrapper">
+                        <input type="checkbox" name="switch-toggle" class="switch-toggle" id="on-off"
+                               th:checked="${sanPhamCT.sanPham.getTrangThai() == 1}" disabled>
+                        <label for="on-off" class="switch-label"></label>
+                    </div>
+
+                </td>
+                <td>
+                <td>
+                    <a th:href="@{/bee-store/san-pham-chi-tiet/delete(id=${sanPhamCT.id})}">
+                        <button type="button" class="btn btn-outline-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.5 3.5a1 1 0 0 0-1 1V5H3a1 1 0 0 0-1 1v1h12V6a1 1 0 0 0-1-1h-.5v-0.5a1 1 0 0 0-1-1h-1a1 1 0 0 0-1 1H6.5a1 1 0 0 0-1-1h-1zM7.5 1a.5.5 0 0 1 .5.5v1h1v-1a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1h-4v-1A.5.5 0 0 1 7.5 1zM4.5 5h7v7h-7V5z"/>
+                            </svg> Xóa
+                        </button>
+                    </a>
+                </td>
+
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" th:href="@{/bee-store/san-pham-chi-tiet?pageSp=__${curentPageSanPham -1}__}">&laquo;</a></li>
+                <li class="page-item" th:each="numberPage :${#numbers.sequence(0,totalPageSanPham - 1)}">
+                    <a class="page-link" th:href="@{/bee-store/san-pham-chi-tiet?pageSp=__${numberPage}__}"
+                       th:classappend="${numberPage == curentPageSanPham} ? 'active': ''"
+                       th:text="${numberPage+1}"></a>
+                </li>
+                <li class="page-item"><a class="page-link" th:href="@{/bee-store/san-pham-chi-tiet?pageSp=__${curentPageSanPham -1}__}">&raquo;</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
