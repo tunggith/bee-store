@@ -134,54 +134,73 @@
             </tbody>
         </table>
         <!-- bảng sản phẩm -->
-        <h3 class="text-center">Sản phẩm</h3>
-        <table class="table table-hover">
-            <thead>
-            <tr class="table-success">
-                <th scope="col">Stt</th>
-                <th scope="col">Mã sản phẩm</th>
-                <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Màu sắc</th>
-                <th scope="col">Size</th>
-                <th scope="col">Chất liệu</th>
-                <th scope="col">Thương Hiệu</th>
-                <th scope="col">Xuất xứ</th>
-                <th scope="col">Giá bán</th>
-                <th scope="col">Giá nhập</th>
-                <th scope="col">Số lượng</th>
-                <th scope="col">Thao tác</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="sanPham,stat : ${listSanPham}">
-                <th scope="row" th:text="${stat.index+1}"></th>
-                <td th:utext="${sanPham.getSanPham().getMa()}"></td>
-                <td th:utext="${sanPham.getSanPham().getTen()}"></td>
-                <td th:utext="${sanPham.getMauSac().getTen()}"></td>
-                <td th:utext="${sanPham.getSize().getTen()}"></td>
-                <td th:utext="${sanPham.getChatLieu()}"></td>
-                <td th:utext="${sanPham.getThuongHieu()}"></td>
-                <td th:utext="${sanPham.getXuatXu()}"></td>
-                <td th:utext="${sanPham.getGiaBan()}"></td>
-                <td th:utext="${sanPham.getGiaNhap()}"></td>
-                <td th:utext="${sanPham.getSoLuongTon()}"></td>
-                <td>
-                    <a th:if="${hoaDon}" th:href="@{/bee-store/chon-san-pham/__${sanPham.id}__?idHd=__${hoaDon.id}__}" type="button" class="btn btn-primary">Chọn</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" th:href="@{/bee-store/trang-chu?pageSp=__${curentPageSanPham -1}__}">&laquo;</a></li>
-                <li class="page-item" th:each="numberPage :${#numbers.sequence(0,totalPageSanPham - 1)}">
-                    <a class="page-link" th:href="@{/bee-store/trang-chu?pageSp=__${numberPage}__}"
-                       th:classappend="${numberPage == curentPageSanPham} ? 'active': ''"
-                       th:text="${numberPage+1}"></a>
-                </li>
-                <li class="page-item"><a class="page-link" th:href="@{/bee-store/trang-chu?pageSp=__${curentPageSanPham -1}__}">&raquo;</a></li>
-            </ul>
-        </nav>
+        <button id="btn-open" class="btn btn-outline-success">chọn sản phẩm</button>
+
+        <!-- Model -->
+        <div id="model-container">
+            <div id="model">
+                <div class="model-header">
+                    <button id="btn-close" class="btn btn-outline-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle"
+                             viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                            <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                        </svg></button>
+                </div>
+                <div class="model-body">
+                    <h3 class="text-center">Sản phẩm</h3>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr class="table-success">
+                            <th scope="col">Stt</th>
+                            <th scope="col">Mã sản phẩm</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Màu sắc</th>
+                            <th scope="col">Size</th>
+                            <th scope="col">Chất liệu</th>
+                            <th scope="col">Thương Hiệu</th>
+                            <th scope="col">Xuất xứ</th>
+                            <th scope="col">Giá bán</th>
+                            <th scope="col">Giá nhập</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Thao tác</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="sanPham,stat : ${listSanPham}">
+                            <th scope="row" th:text="${stat.index+1}"></th>
+                            <td th:utext="${sanPham.getSanPham().getMa()}"></td>
+                            <td th:utext="${sanPham.getSanPham().getTen()}"></td>
+                            <td th:utext="${sanPham.getMauSac().getTen()}"></td>
+                            <td th:utext="${sanPham.getSize().getTen()}"></td>
+                            <td th:utext="${sanPham.getChatLieu()}"></td>
+                            <td th:utext="${sanPham.getThuongHieu()}"></td>
+                            <td th:utext="${sanPham.getXuatXu()}"></td>
+                            <td th:utext="${sanPham.getGiaBan()}"></td>
+                            <td th:utext="${sanPham.getGiaNhap()}"></td>
+                            <td th:utext="${sanPham.getSoLuongTon()}"></td>
+                            <td>
+                                <a th:if="${hoaDon}" th:href="@{/bee-store/chon-san-pham/__${sanPham.id}__?idHd=__${hoaDon.id}__}" type="button" class="btn btn-primary">Chọn</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" th:href="@{/bee-store/trang-chu?pageSp=__${curentPageSanPham -1}__}">&laquo;</a></li>
+                            <li class="page-item" th:each="numberPage :${#numbers.sequence(0,totalPageSanPham - 1)}">
+                                <a class="page-link" th:href="@{/bee-store/trang-chu?pageSp=__${numberPage}__}"
+                                   th:classappend="${numberPage == curentPageSanPham} ? 'active': ''"
+                                   th:text="${numberPage+1}"></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" th:href="@{/bee-store/trang-chu?pageSp=__${curentPageSanPham -1}__}">&raquo;</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!--  end model-->
     </div>
     <div class="w-25 p-1">
         <div>
@@ -282,9 +301,7 @@
 </div>
 </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+<script src="/script/main.js"></script>
 </body>
 
 </html>

@@ -158,3 +158,33 @@ input[type="submit"]:hover {
 .row{
     padding: 10px 10px;
 }
+/* model Pop up */
+#model-container{
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    margin-top: 8%;
+    z-index:9999;
+}
+#model{
+    background-color: rgb(237, 207, 167);
+    max-width: 1000px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border: 1px solid gray;
+    border-radius: 6px;
+}
+#model-container.show{
+    opacity: 1;
+    pointer-events: all;
+}
+#btn-close{
+    border: 0px;
+}
