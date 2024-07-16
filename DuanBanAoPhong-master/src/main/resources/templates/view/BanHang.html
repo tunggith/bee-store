@@ -128,7 +128,8 @@
                 <td th:utext="${gioHang.getSoLuong()}"></td>
                 <td th:utext="${gioHang.getTongTien()}"></td>
                 <td>
-                    <button class="btn btn-danger">delete</button>
+                    <a th:if="${hoaDon}" type="button" class="btn btn-danger" th:href="@{/bee-store/delete/__${gioHang.id}__?idHd=__${hoaDon.id}__}"
+                    onclick="return confirm('vui lòng xác nhận xóa sản phẩm khỏi giỏ hàng!')">delete</a>
                 </td>
             </tr>
             </tbody>

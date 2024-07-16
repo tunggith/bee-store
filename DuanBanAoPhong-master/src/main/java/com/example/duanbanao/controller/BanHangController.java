@@ -151,11 +151,19 @@ public class BanHangController {
         }
         return "redirect:/bee-store/trang-chu";
     }
-    @GetMapping("delete-san-pham/{id}")
-    public String deleteSanPham(@PathVariable Integer id){
-        repoChiTietHoaDon.deleteById(id);
 
-        return "redirect:/bee-store/chon-hoa-don/";
+    @GetMapping("delete/{id}")
+    public String deleteSanPham(@PathVariable Integer id,
+                                @RequestParam Integer idHd){
+        Optional<ChiTietHoaDon> hoaDonChiTietOpt = repoChiTietHoaDon.findById(id);
+        if(hoaDonChiTietOpt.isPresent()){
+            ChiTietHoaDon chiTietHoaDon = hoaDonChiTietOpt.get();
+            ChiTietSanPham chiTietSanPham =chiTietHoaDon.getChiTietSanPham();
+            chiTietSanPham.setSoLuongTon(chiTietSanPham.getSoLuongTon()+chiTietHoaDon.getSoLuong());
+            repoChiTietSanPham.save(chiTietSanPham);
+            repoChiTietHoaDon.deleteById(id);
+        }
+        return "redirect:/bee-store/chon-hoa-don/" + idHd;
     }
 
 }
