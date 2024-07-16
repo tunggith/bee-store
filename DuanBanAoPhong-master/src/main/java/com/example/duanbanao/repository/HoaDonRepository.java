@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HoaDonRepository extends JpaRepository<HoaDon,Integer> {
-    @Query("select hd from HoaDon hd where hd.trangThai = ?1")
+    @Query("SELECT hd FROM HoaDon hd WHERE hd.trangThai = ?1 GROUP BY hd.id ORDER BY hd.id DESC")
     Page<HoaDon> findHoaDonByTrangThai(Integer trangThai, Pageable pageable);
 }

@@ -158,3 +158,66 @@ input[type="submit"]:hover {
 .row{
     padding: 10px 10px;
 }
+.page-item {
+    position: relative;
+    z-index: 1; /* Đặt z-index thấp */
+}
+
+.popupkh:not([style*="display: none"]) + .popup-overlay {
+    display: block;
+}
+.popupkh {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 10000; /* Đặt một giá trị rất cao */
+    display: none;
+}
+
+.popupkh-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 1200px;
+    position: relative;
+    z-index: 10001; /* Cao hơn .popupkh */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 5px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+#closePopupKhBtn {
+    position: absolute;
+    right: -100%;
+    margin-right: -50px; /* Điều chỉnh khoảng cách từ mép phải */
+}

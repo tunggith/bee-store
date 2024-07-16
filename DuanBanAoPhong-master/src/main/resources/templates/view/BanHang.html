@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="utf-8">
@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/script/popup.js">
 </head>
 
 <body>
@@ -115,20 +116,27 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="gioHang,stat : ${listGioHang}">
-                <th scope="row" th:text="${stat.index+1}">1</th>
-                <td th:utext="${gioHang.getHoaDon().getMa}"></td>
+            <tr th:each="gioHang, stat : ${listGioHang}">
+                <th scope="row" th:text="${stat.index + 1}">1</th>
+                <td th:utext="${gioHang.getHoaDon().getMa()}"></td>
                 <td th:utext="${gioHang.getChiTietSanPham().getSanPham().getTen()}"></td>
                 <td th:utext="${gioHang.getChiTietSanPham().getMauSac().getTen()}"></td>
-                <td th:utext="${gioHang.getChiTietSanPham().getSize().getTen()}"> </td>
+                <td th:utext="${gioHang.getChiTietSanPham().getSize().getTen()}"></td>
                 <td th:utext="${gioHang.getChiTietSanPham().getChatLieu()}"></td>
                 <td th:utext="${gioHang.getChiTietSanPham().getThuongHieu()}"></td>
                 <td th:utext="${gioHang.getChiTietSanPham().getXuatXu()}"></td>
                 <td th:utext="${gioHang.getChiTietSanPham().getGiaBan()}"></td>
-                <td th:utext="${gioHang.getSoLuong()}"></td>
+                <td>
+                    <div style="display: flex; align-items: center;">
+                        <a th:href="@{/bee-store/tru-san-pham/__${gioHang.getChiTietSanPham().getSanPham().id}__?idHd=__${gioHang.getHoaDon().id}__}" class="btn btn-outline-danger" style="margin-right: 18px;" >-</a>
+                        <input style="text-align: center; width: 30px;" th:value="${gioHang.getSoLuong()}" name="soluong" id="soluongInput" th:data-product-id="${gioHang.getChiTietSanPham().getSanPham().id}" th:data-hoa-don-id="${gioHang.getHoaDon().id}">
+                        <a  th:href="@{/bee-store/cong-san-pham/__${gioHang.getChiTietSanPham().getSanPham().id}__?idHd=__${gioHang.getHoaDon().id}__}" class="btn btn-outline-success" style="margin-left: 18px;" >+</a>
+                    </div>
+                </td>
                 <td th:utext="${gioHang.getTongTien()}"></td>
                 <td>
-                    <button class="btn btn-danger">delete</button>
+                    <a
+                       th:href="@{/bee-store/xoa-san-pham/__${gioHang.getChiTietSanPham().getSanPham().id}__?idHd=__${gioHang.getHoaDon().id}__}"  class="btn btn-danger">delete</a>
                 </td>
             </tr>
             </tbody>
@@ -189,7 +197,7 @@
             <form action="/bee-store/seach-khach-hang" method="get">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Tên khách hàng or số điện thoại..."
-                           aria-label="Tên Khách hàng" aria-describedby="basic-addon2" name="sdt">
+                           aria-label="Tên Khách hàng" aria-describedby="basic-addon2" name="sdt" th:value="${sdt ?: ''}">
                     <button type="submit" class="input-group-text" id="basic">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-search"
@@ -203,6 +211,7 @@
         </div>
         <div>
             <h4 class="text-center bg-secondary text-light">Tạo hóa đơn</h4>
+
             <form action="/bee-store/tao-hoa-don" method="post">
                 <div class="mb-3">
                     <label for="tenkhachHang" class="form-label">Tên khách hàng : </label>
@@ -210,7 +219,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="soDienThoai" class="form-label">số điện thoại</label>
-                    <input type="text" class="form-control" id="soDienThoai" th:if="${khachHang}" th:value="${khachHang.getSdt()}" readonly>
+                    <input type="text" class="form-control" name="soDienThoai" id="soDienThoai" th:if="${khachHang}" th:value="${khachHang.getSdt()}" readonly>
                 </div>
                 <button type="submit" class="btn btn-outline-success">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -224,8 +233,101 @@
                     </svg>
                     Tạo hóa đơn
                 </button>
+
             </form>
+            <button class="btn btn-outline-success" id="openPopupKhBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-clipboard-plus" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7"/>
+                    <path
+                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                    <path
+                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                </svg>
+                Chọn Khách Hàng
+            </button>
         </div>
+
+        <div id="popupkh" class="popupkh">
+            <div id="content">
+                <div class="popupkh-content">
+
+                    <a  class="btn btn-danger"  href="/bee-store/clonePopUp/"  style="margin-right: 100%" type="button" id="closePopupKhBtn">x</a>
+                    <h2>Thông tin Khách Hàng</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form action="/bee-store/addKH" method="post" id="khachHangForm">
+                                <div class="form-group">
+                                    <label for="ten">Tên:</label>
+                                    <input type="text" id="ten" name="tenKH" >
+                                </div>
+                                <div class="form-group">
+                                    <label f>diaChi</label>
+                                    <input type="text" id="diaChidiaChi" name="diaChi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="emailKH">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sdt">Số điện thoại:</label>
+                                    <input type="tel" id="sdt" name="sdtKH">
+                                </div>
+                                <button type="submit">Lưu</button>
+
+                            </form>
+                        </div>
+
+                        <div class="col-md-6">
+                            <table id="khachHangTable" class="table">
+                                <thead>
+                                <tr>
+                                    <th>Mã</th>
+                                    <th>Tên</th>
+                                    <th>SĐT</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Trạng thái</th>
+                                    <th>thao tác</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="khachHang:  ${kh}">
+                                    <td th:text="${khachHang.ma}"></td>
+                                    <td th:text="${khachHang.ten}"></td>
+                                    <td th:text="${khachHang.sdt}"></td>
+                                    <td th:text="${khachHang.diaChi}"></td>
+                                    <td th:if="${khachHang.getTrangThai() == 1 }">hoạt dộng</td>
+                                    <td th:if="${khachHang.getTrangThai() == 0 }">không hoạt động</td>
+                                    <td>
+                                        <a th:href="@{/bee-store/chonKhachHang/{id}(id=${khachHang.id})}" class="btn btn-primary">Chọn</a>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item" th:classappend="${currentPageKh == 0} ? 'disabled'">
+                                        <a id="open1" class="page-link pagination-link" th:href="@{/bee-store/trang-chu(pageKh=${currentPageKh - 1})}" th:data-page="${currentPageKh - 1}">Previous</a>
+                                    </li>
+                                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPagesKh - 1)}" th:classappend="${currentPageKh == i} ? 'active'">
+                                        <a id="open2" class="page-link pagination-link" th:href="@{/bee-store/trang-chu(pageKh=${i})}" th:text="${i + 1}" th:data-page="${i}"></a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${currentPageKh == totalPagesKh - 1} ? 'disabled'">
+                                        <a id="open3" class="page-link pagination-link" th:href="@{/bee-store/trang-chu(pageKh=${currentPageKh + 1})}" th:data-page="${currentPageKh + 1}">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
         <div>
             <h4 class="text-center bg-secondary text-light">Thanh Toán</h4>
             <form >
@@ -282,9 +384,98 @@
 </div>
 </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+
+</script>
+
+<script>
+    const openPopupKhBtn = document.getElementById('openPopupKhBtn');
+    const open1 = document.getElementById('open1');
+    const open2 = document.getElementById('open2');
+    const open3 = document.getElementById('open3');
+
+    const closePopupKhBtn = document.getElementById('closePopupKhBtn');
+    const popupkh = document.getElementById('popupkh');
+
+    openPopupKhBtn.addEventListener('click', function() {
+        popupkh.style.display = 'block';
+    });
+
+    open1.addEventListener('click', function() {
+        popupkh.style.display = 'block';
+    });
+    open2.addEventListener('click', function() {
+        popupkh.style.display = 'block';
+    });
+    open3.addEventListener('click', function() {
+        popupkh.style.display = 'block';
+    });
+    closePopupKhBtn.addEventListener('click', function() {
+        popupkh.style.display = 'none';
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target == popupkh) {
+            popupkh.style.display = 'none';
+        }
+    });
+
+</script>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Hàm để gán sự kiện click cho các liên kết phân trang
+        function loads() {
+            document.querySelectorAll('.pagination-link').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault(); // Ngăn hành động mặc định của liên kết
+
+                    var page = this.getAttribute('data-page');
+
+                    // Sử dụng AJAX để tải nội dung mới
+                    fetch(`/bee-store/trang-chu?pageKh=${page}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            // Tạo một div tạm để chứa nội dung mới
+                            var tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = html;
+
+                            // Lấy nội dung cần cập nhật từ div tạm
+                            var newContent = tempDiv.querySelector('#content').innerHTML;
+
+                            // Cập nhật nội dung trong phần tử hiện tại
+                            document.getElementById('content').innerHTML = newContent;
+
+                            // Gán lại sự kiện click cho các liên kết phân trang mới
+                            loads();
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+        }
+
+        // Gán sự kiện click lần đầu khi trang tải
+        loads();
+    });
+
+
+
+</script>
+
+<script>
+    const popupkh = document.getElementById('popupkh');
+    var closePopupKhBtn = document.getElementById("closePopupKhBtn")
+    closePopupKhBtn.addEventListener('click', function() {
+        popupkh.style.display = 'none';
+    });
+</script>
+
+
+
+
 </body>
 
 </html>
