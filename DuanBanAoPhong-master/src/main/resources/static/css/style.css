@@ -1,26 +1,32 @@
-.table thead{
+.table thead {
     background-color: aquamarine;
 }
-.container-fluid{
+
+.container-fluid {
     margin-top: 20px;
 }
-.container-fluid button{
+
+.container-fluid button {
     background-color: burlywood;
 }
-#content1{
+
+#content1 {
     background-color: bisque;
     width: 20%;
 }
-.pagination{
+
+.pagination {
     justify-content: center;
 }
-.content-add{
+
+.content-add {
     justify-content: center;
     background-color: antiquewhite;
     border: 1px solid #ddd;
     border-radius: 10px;
 }
-.search{
+
+.search {
     justify-content: center;
     background-color: antiquewhite;
     border: 1px solid #ddd;
@@ -28,29 +34,20 @@
     display: flex;
     margin-top: 5px;
 }
-/*.content-add h2 {*/
-/*    margin-bottom: 20px;*/
-/*}*/
-/*.form-group {*/
-/*    margin-bottom: 1rem;*/
-/*}*/
-/*.input-group-text {*/
-/*    width: 100px;*/
-/*}*/
-/*.row > .col-md-6 {*/
-/*    padding-right: 15px;*/
-/*    padding-left: 15px;*/
-/*}*/
-.items{
+
+.items {
     margin-left: 20%;
 }
+
 .items .col-auto {
     margin: 10px;
-}#wrapper {
-     display: flex;
-     justify-content: center;
-     align-items: center;
- }
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .switch-toggle {
     display: none;
@@ -91,13 +88,16 @@
     left: calc(100% - 4px);
     transform: translateX(-100%);
 }
+
 .form-group {
     margin-bottom: 15px;
 }
+
 label {
     display: block;
     margin-bottom: 5px;
 }
+
 select, input[type="text"] {
     width: 100%;
     padding: 10px;
@@ -107,6 +107,7 @@ select, input[type="text"] {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 input[type="submit"] {
     width: 100%;
     background-color: #4CAF50;
@@ -117,15 +118,17 @@ input[type="submit"] {
     border-radius: 4px;
     cursor: pointer;
 }
+
 input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-.form-row{
+.form-row {
     display: flex;
     margin-left: 10px;
     border-radius: 8px;
 }
+
 .search-form {
     position: relative;
 }
@@ -150,14 +153,17 @@ input[type="submit"]:hover {
     color: #fff;
     border-color: #198754;
 }
-.col{
+
+.col {
     background-color: antiquewhite;
     border-radius: 10px;
     padding: 10px 10px;
 }
-.row{
+
+.row {
     padding: 10px 10px;
 }
+
 .page-item {
     position: relative;
     z-index: 1; /* Đặt z-index thấp */
@@ -166,13 +172,14 @@ input[type="submit"]:hover {
 .popupkh:not([style*="display: none"]) + .popup-overlay {
     display: block;
 }
+
 .popupkh {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 10000; /* Đặt một giá trị rất cao */
     display: none;
 }
@@ -188,36 +195,40 @@ input[type="submit"]:hover {
     z-index: 10001; /* Cao hơn .popupkh */
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 5px;
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.table th, .table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.table th {
-    background-color: #f2f2f2;
-}
 #closePopupKhBtn {
     position: absolute;
     right: -100%;
     margin-right: -50px; /* Điều chỉnh khoảng cách từ mép phải */
+}
+
+#model-container {
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    margin-top: 8%;
+    z-index: 9999;
+}
+
+#model {
+    background-color: rgb(237, 207, 167);
+    max-width: 1000px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid gray;
+    border-radius: 6px;
+}
+
+#model-container.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#btn-close {
+    border: 0px;
 }

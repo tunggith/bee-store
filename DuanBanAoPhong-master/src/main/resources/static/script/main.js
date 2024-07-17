@@ -22,3 +22,15 @@ function colorLink() {
 }
 
 linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+const btn_open = document.getElementById('btn-open');
+const btn_close = document.getElementById('btn-close');
+const model_container = document.getElementById('model-container');
+btn_open.addEventListener('click',()=>{
+    // add class show
+    model_container.classList.add('show');
+});
+btn_close.addEventListener('click',()=>{
+    // remove class show
+    model_container.classList.remove('show');
+});
